@@ -81,9 +81,10 @@ namespace MultiQueueSimulation
                         oneRaw.Probability = decimal.Parse(intervalIntoTime_Prob[1]);
                         simSystem.InterarrivalDistribution.Add(oneRaw);
                     }
+                    //Calculate Cumulative Probability and Range for each Row in Interarrival Distribution
+                    simSystem.calculateCummProb_Ranges_InterarrivalDistribution();
                 }
-                //Calculate Cumulative Probability and Range for each Row in Interarrival Distribution
-                simSystem.calculateCummProb_Ranges();
+               
             }
         }
     }

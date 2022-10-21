@@ -15,7 +15,7 @@ namespace MultiQueueModels
             this.PerformanceMeasures = new PerformanceMeasures();
             this.SimulationTable = new List<SimulationCase>();
         }
-        public void calculateCummProb_Ranges()
+        public void calculateCummProb_Ranges_InterarrivalDistribution()
         {
             decimal sumCProb = 0;
             foreach (TimeDistribution timeRow in this.InterarrivalDistribution)
