@@ -82,6 +82,8 @@ namespace MultiQueueSimulation
                         simSystem.InterarrivalDistribution.Add(oneRaw);
                     }
                 }
+                //Calculate Cumulative Probability and Range for each Row in Interarrival Distribution
+                simSystem.calculateCummProb_Ranges();
             }
         }
     }

@@ -11,14 +11,7 @@ namespace MultiQueueModels
         public Server()
         {
             this.TimeDistribution = new List<TimeDistribution>();
-            decimal sumCProb = 0;
-           foreach(TimeDistribution timeServer in this.TimeDistribution)
-            {
-                timeServer.MinRange = (int)(sumCProb * 100) + 1;
-                sumCProb += timeServer.Probability;
-                timeServer.CummProbability = sumCProb;
-                timeServer.MaxRange = (int)(sumCProb * 100);
-            }
+           
         }
 
         public int ID { get; set; }
