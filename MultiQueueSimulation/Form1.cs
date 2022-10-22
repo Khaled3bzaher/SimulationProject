@@ -21,71 +21,8 @@ namespace MultiQueueSimulation
         SimulationSystem simSystem = new SimulationSystem();
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Read From Test Case File
-            FileStream fileStream = new FileStream("TestCases/TestCase1.txt", FileMode.Open);
-            StreamReader reader = new StreamReader(fileStream);
-            while (reader.Peek() != -1)
-            {
-                string lineRead = reader.ReadLine();
-                if (lineRead == "NumberOfServers")
-                {
-                    simSystem.NumberOfServers = int.Parse(reader.ReadLine());
-                }
-                else if (lineRead == "")
-                    continue;
-                else if(lineRead == "StoppingNumber")
-                {
-                    simSystem.StoppingNumber = int.Parse(reader.ReadLine());
-                }
-                else if(lineRead == "StoppingCriteria"){
-                    int stopCri = int.Parse(reader.ReadLine());
-                    switch (stopCri)
-                    {
-                        case 1:
-                            simSystem.StoppingCriteria = Enums.StoppingCriteria.NumberOfCustomers;
-                            break;
-                        case 2:
-                            simSystem.StoppingCriteria = Enums.StoppingCriteria.SimulationEndTime;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else if(lineRead== "SelectionMethod")
-                {
-                    int selection = int.Parse(reader.ReadLine());
-                    switch (selection)
-                    {
-                        case 1:
-                            simSystem.SelectionMethod = Enums.SelectionMethod.HighestPriority;
-                            break;
-                        case 2:
-                            simSystem.SelectionMethod = Enums.SelectionMethod.Random;
-                            break;
-                        default:
-                            simSystem.SelectionMethod = Enums.SelectionMethod.LeastUtilization;
-                            break;
-                    }
-                }
-                else if(lineRead == "InterarrivalDistribution")
-                {
-                    while (true) { 
-                        string intervalLine = reader.ReadLine();
-                        if (intervalLine == "")
-                        {
-                            break;
-                        }
-                        TimeDistribution oneRaw = new TimeDistribution();
-                        string[] intervalIntoTime_Prob = intervalLine.Split(',');
-                        oneRaw.Time = int.Parse(intervalIntoTime_Prob[0]);
-                        oneRaw.Probability = decimal.Parse(intervalIntoTime_Prob[1]);
-                        simSystem.InterarrivalDistribution.Add(oneRaw);
-                    }
-                    //Calculate Cumulative Probability and Range for each Row in Interarrival Distribution
-                    simSystem.calculateCummProb_Ranges_InterarrivalDistribution();
-                }
-               
-            }
+            simSystem.readFromFile("G:/FCIS/Seventh Semester/Modeling & Simulation/Labs/Lab 2/Template_Students/MultiQueueSimulation/MultiQueueSimulation/TestCases/TestCase1.txt",simSystem);
+            
         }
     }
 }
