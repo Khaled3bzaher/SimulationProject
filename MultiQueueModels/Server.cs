@@ -11,6 +11,7 @@ namespace MultiQueueModels
         public Server()
         {
             this.TimeDistribution = new List<TimeDistribution>();
+           
         }
 
         public int ID { get; set; }
@@ -19,6 +20,7 @@ namespace MultiQueueModels
         public decimal Utilization { get; set; }
 
         public List<TimeDistribution> TimeDistribution;
+        
 
         //optional if needed use them
         public int FinishTime { get; set; }
