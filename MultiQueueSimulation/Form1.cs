@@ -18,7 +18,7 @@ namespace MultiQueueSimulation
         {
             InitializeComponent();
         }
-        SimulationSystem simSystem = new SimulationSystem();
+        public SimulationSystem simSystem = new SimulationSystem();
         public int calculateServiceForServer(int serverID,int RandomService)
         {
             foreach(TimeDistribution oneRow in simSystem.Servers[serverID].TimeDistribution)
@@ -56,9 +56,9 @@ namespace MultiQueueSimulation
             simSystem.PerformanceMeasures.WaitingProbability = (decimal)waitedCustomers / simSystem.StoppingNumber;
             simSystem.PerformanceMeasures.MaxQueueLength = maxInQueue;
         }
+        int finishTime = 0;
         public void calculateServersPerformace()
         {
-            int finishTime = 0;
             foreach (Server localServer in simSystem.Servers)
             {
                 if (finishTime < localServer.FinishTime)
@@ -84,7 +84,7 @@ namespace MultiQueueSimulation
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            simSystem.readFromFile("C:/Users/Computer Shop/Downloads/SimulationProject-Nada/MultiQueueSimulation/TestCases/TestCase1.txt", simSystem);
+            simSystem.readFromFile("G:/FCIS/Seventh Semester/Modeling & Simulation/Labs/Lab 2/Template_Students/MultiQueueSimulation/MultiQueueSimulation/TestCases/TestCase1.txt", simSystem);
             //Starting System
             Random RandomInterArrival = new Random();
             Random RandomService = new Random();
@@ -293,13 +293,27 @@ namespace MultiQueueSimulation
             //Performance Measures For Each Server
             calculateServersPerformace();
             //Show Test Results.
+            foreach(Server localServer in simSystem.Servers)
+            {
+                localServer.FinishTime = 0;
+            }
             string result = TestingManager.Test(simSystem, Constants.FileNames.TestCase1);
             MessageBox.Show(result);
             var binding = new BindingList<SimulationCase>(simSystem.SimulationTable);
             var src = new BindingSource(binding, null);
             dataGridView1.DataSource = src;
+            foreach(Server localServer in simSystem.Servers)
+            {
+                comboBox1.Items.Add(localServer.ID);
+            }
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem != null) { 
+                Form2 graphForm = new Form2(simSystem, comboBox1.SelectedIndex+1,finishTime);
+                graphForm.Show();
+            }
+        }
     }
 }
